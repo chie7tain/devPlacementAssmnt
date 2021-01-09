@@ -1,0 +1,28 @@
+/* default browsser */
+*{
+  padding: 0;
+  margin:0;
+  box-sizing: border-box;
+}
+.centered-content{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/*styles for main container */
+.container{
+  background: #262A41;
+  display: flex;
+  justify-content: space-between;
+}
+/* styles for hello section */
+.hello-section{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+/* ====================== */
+/* user-display-section */
+.user-display-section{
+  background: #f7f7ff;
+}

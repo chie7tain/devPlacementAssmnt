@@ -1,0 +1,148 @@
+<html>
+  <head lang="en">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=7">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- end of meta -->
+        <!-- font awesome -->
+        <script src="https://kit.fontawesome.com/52f2afaff9.js" crossorigin="anonymous"></script>
+        <!--end of font awesome  -->
+        <!-- icons specifically for github made by github -->
+        <script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
+        <!-- end of icons from github -->
+    <!-- styles -->
+    <link rel="stylesheet" href="styles.css">
+    <!-- responsive styles -->
+    <link rel="stylesheet" href="./responsiveStyles/desktop.css">
+    <link rel="stylesheet" href="./responsiveStyles/tablet.css">
+    <link rel="stylesheet" href="./responsiveStyles/mobile.css">
+    <!-- end of styles -->
+  </head>
+  <body>
+    <!-- main-container -->
+    <div class="container ">
+      <!-- hello section  -->
+      <section class="hello-section centered-content">
+        <div class="hello-text-container">
+          <h2>Hello, <span class="username" data-username>Emerald</span></h2>
+          <div class="welcome-text-container">
+            <p class="welcome-text">
+              welcome to your dashboard, kindly sort through the user base
+            </p>
+          </div>
+        </div>
+        <!-- search user form container -->
+        <div class="search-form-container">
+          <form action="">
+            <span class="search-icon"></span>
+            <input type="text" placeholder="Find a user">
+          </form>
+        </div>
+        <!-- end of search user container -->
+        <!-- ============================ -->
+        <div class="find-user-button-container">
+          <div class="button-container">
+            <button id="all-users-btn">
+              <i class="fas fa-users"></i>
+            </button>
+            All Users
+          </div>
+          <div class="button-container">
+            <button id="male-users-btn">
+              <i class="fas fa-male"></i>
+            </button>
+            Male Users
+          </div>
+          <div class="button-container">
+            <button id="female-users-btn">
+              <i class="fas fa-female"></i>
+            </button>
+            Female Users
+          </div>
+        </div>
+      </section>
+      <!-- end of hello section -->
+      <!-- ---------============ -->
+      <!-- user display section -->
+      <section class="user-display-section">
+        <!-- users display heading container -->
+        <div class="users-display-heading-container">
+          <h1 class="current-heading">All Users</h1>
+        </div>
+        <!-- filter form container -->
+        <div class="filter-form-container">
+          <p class="filter-text">Filter by</p>
+          <form action="">
+            <div class="filter-input-container">
+              <input type="text" placeholder="find in list">
+            </div>
+            <div class="filter-country-container">
+              <select name="" id="country-list">
+                <option value="country" selected disabled>
+                  Country
+                </option>
+                <option value="nigeria">Nigeria</option>
+              </select>
+            </div>
+            <div class="filter-country-toggle-btn-container">
+              <!-- TODO create a toggle btn here search online for copy paste so its faster -->
+            </div>
+          </form>
+        </div>
+        <!-- end of filter form container -->
+        <!-- =================== -->
+        <!--users card container -->
+        <div class="user-card-container">
+          <!-- individual user card container -->
+          <div class="individual-user-card-container">
+            <!-- user-image -->
+            <div class="user-image-container">
+              <img src="./founder.jpg" alt="user's image">
+            </div>
+            <!-- user details -->
+            <div class="user-details-container">
+              <!-- user name -->
+              <div class="user-name-container">
+                <h3 class="user-name">Chie7tain okwuobi</h3>
+              </div>
+              <!-- user address -->
+              <div class="user-address-container">
+                <p class="user-address">
+                  Plot C80 Azhata Off Kurudu Orozo Road
+                </p>
+              </div>
+              <!-- user contact details -->
+              <div class="user-contact-details-container">
+                <div class="user-email-container">
+                  <p class="user-email-address">
+                    <i class="far fa-envelope"></i>fredrickokwuobi@gmail.com
+                  </p>
+                </div>
+                <div class="user-phone-number-container">
+                  <p class="user-phone-number">
+                    <i class="fas fa-phone-volume"></i>
+                    08034829625
+                  </p>
+                </div>
+              </div>
+            </div>
+            <!-- expand user details button -->
+            <div class="expand-user-details-button-container">
+              <button class="expand-user-details-btn">
+              <i class="fas fa-arrow-right"></i>
+              </button>
+            </div>
+          </div>
+          <!-- end of individual user card container -->
+          <!-- =========== -->
+        </div>
+        <!-- end of users card container -->
+        <!-- =============== -->
+      </section>
+      <!-- end of user display section -->
+      <!-- =========================== -->
+    </div>
+    <!-- end of main container -->
+  </body>
+  </html>

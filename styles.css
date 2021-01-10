@@ -3,7 +3,27 @@
   padding: 0;
   margin:0;
   box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
 }
+/* root styles for construction */
+:root{
+  --mainDarkBlue:#262A41;
+  --inputBackground:#3C3F54;
+  --firstWhite:#F7F7FF;
+  --mainGrey:#707070;
+  --standardWhite:#fff;
+  --secondDarkBlue:#3c3f54;
+  --mainPink:#f935a9;
+  --mainLightBlue:#30bbb5;
+  --mainPurple:#7946c1;
+  --mainBlack:#000;
+  --bluePurple:#323974;
+  --secondLight:#75d6d1;
+  /* non-colors */
+  --mainTransition:0.3s all linear;
+  --mainBorderRadius:16px;
+}
+/* end of root styles for construction */
 .centered-content{
   display: flex;
   justify-content: center;
@@ -20,9 +40,140 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  width:100%;
+  padding:0 5.9em;
 }
+/* hello text container */
+.hello-text-container{
+  margin-bottom: 3em;
+  width:100%;
+}
+.hello-text-container > h2{
+ font-family: 'Poppins', sans-serif;
+ font-weight: 100;
+ color:#fff;
+ font-size:1.3em;
+}
+.username{
+  font-weight:700;
+  font-size:.8em;
+}
+.welcome-text-container{
+  margin-top:5px;
+
+}
+.welcome-text{
+  color:#fff;
+  font-size:.8em;
+  opacity: 0.69;
+  letter-spacing: 1;
+}
+/* search form container */
+.search-form-container{
+  border:1px solid;
+  width:100%;
+  height:60px;
+  margin-bottom: 3em;
+  border:none;
+  position:relative;
+}
+.find-user-input{
+  width:100%;
+  height:100%;
+  border-radius: var(--mainBorderRadius);
+  border:none;
+  background: var(--inputBackground);
+  color:var(--standardWhite);
+  text-indent: 5em;
+  z-index:2;
+  font-size:.9em;
+}
+.search-icon{
+  position:absolute;
+  bottom:1.4em;
+  z-index:3;
+  margin-left:1.3em;
+}
+.fa-search{
+  color:var(--firstWhite);
+  opacity: 0.7;
+}
+.find-user-input::placeholder{
+  color:var(--standardWhite);
+  opacity: 0.7;
+}
+/* end of search form container */
+/* show users container and buttons */
+.show-user-container{
+  display:flex;
+  flex-direction: column;
+  width:100%;
+  /* border:1px solid blue; */
+}
+.find-users-heading-container{
+  margin-bottom:1.1em;
+}
+.find-users-heading-container > h3{
+  color:var(--firstWhite);
+  font-size: .9em;
+  opacity: .7;
+  letter-spacing: 1;
+  font-weight: 200;
+}
+.find-users-button-container{
+  display:flex;
+  /* justify-content: space-around; */
+  /* border:2px solid red; */
+  width:100%;
+}
+.filter-user-button-container{
+  display:flex;
+  flex-direction:column;
+  align-items: center;
+  margin-right:3em;
+  /* width:100%; */
+  /* border:1px solid white; */
+}
+.user-btn{
+  border-radius:var(--mainBorderRadius);
+  border:none;
+  margin-bottom:7px;
+width:70px;
+height: 70px;
+color:var(--firstWhite);
+cursor: pointer;
+}
+.user-btn:hover{
+  transform: scale(1.2);
+}
+.button-text{
+  color:var(--firstWhite);
+  font-size: .7em;
+  opacity: .8;
+  letter-spacing: 1;
+  font-weight: 200;
+
+}
+.user-icon{
+  font-size:2.1em;
+}
+#all-users-btn{
+  background:var(--mainPink);
+  transition: var(--mainTransition);
+}
+
+#male-users-btn{
+  background:var(--mainLightBlue);
+  transition: var(--mainTransition);
+}
+#female-users-btn{
+  background:var(--mainPurple);
+  transition: var(--mainTransition);
+}
+/* end of show users and container button */
 /* ====================== */
 /* user-display-section */
 .user-display-section{
   background: #f7f7ff;
+  width:100%;
 }

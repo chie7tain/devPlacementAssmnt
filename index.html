@@ -42,7 +42,7 @@
         <div class="search-form-container">
           <form action="">
             <span class="search-icon">
-              <i class="fas fa-search"></i>
+              <i class="fas fa-search search"></i>
             </span>
             <input type="text" placeholder="Find a user" class="find-user-input">
           </form>
@@ -84,79 +84,156 @@
       <!-- ---------============ -->
       <!-- user display section -->
       <section class="user-display-section">
-        <!-- users display heading container -->
-        <div class="users-display-heading-container">
-          <h1 class="current-heading">All Users</h1>
-        </div>
-        <!-- filter form container -->
-        <div class="filter-form-container">
-          <p class="filter-text">Filter by</p>
-          <form action="">
-            <div class="filter-input-container">
-              <input type="text" placeholder="find in list">
-            </div>
-            <div class="filter-country-container">
-              <select name="" id="country-list">
-                <option value="country" selected disabled>
-                  Country
-                </option>
-                <option value="nigeria">Nigeria</option>
-              </select>
-            </div>
-            <div class="filter-country-toggle-btn-container">
-              <!-- TODO create a toggle btn here search online for copy paste so its faster -->
-            </div>
-          </form>
-        </div>
-        <!-- end of filter form container -->
-        <!-- =================== -->
-        <!--users card container -->
-        <div class="user-card-container">
-          <!-- individual user card container -->
-          <div class="individual-user-card-container">
-            <!-- user-image -->
-            <div class="user-image-container">
-              <img src="./founder.jpg" alt="user's image">
-            </div>
-            <!-- user details -->
-            <div class="user-details-container">
-              <!-- user name -->
-              <div class="user-name-container">
-                <h3 class="user-name">Chie7tain okwuobi</h3>
-              </div>
-              <!-- user address -->
-              <div class="user-address-container">
-                <p class="user-address">
-                  Plot C80 Azhata Off Kurudu Orozo Road
-                </p>
-              </div>
-              <!-- user contact details -->
-              <div class="user-contact-details-container">
-                <div class="user-email-container">
-                  <p class="user-email-address">
-                    <i class="far fa-envelope"></i>fredrickokwuobi@gmail.com
-                  </p>
-                </div>
-                <div class="user-phone-number-container">
-                  <p class="user-phone-number">
-                    <i class="fas fa-phone-volume"></i>
-                    08034829625
-                  </p>
-                </div>
-              </div>
-            </div>
-            <!-- expand user details button -->
-            <div class="expand-user-details-button-container">
-              <button class="expand-user-details-btn">
-              <i class="fas fa-arrow-right"></i>
-              </button>
-            </div>
+        <!-- user display center -->
+        <div class="user-display-center">
+          <!-- users display heading container -->
+          <div class="users-display-heading-container">
+            <h1 class="current-heading">All Users</h1>
           </div>
-          <!-- end of individual user card container -->
-          <!-- =========== -->
+          <!-- filter form container -->
+          <div class="filter-form-container">
+            <div class="filter-text-container">
+              <p class="filter-text">Filter by</p>
+            </div>
+            <form action="" class="filter-form">
+              <div class="filter-input-container">
+                <span class="find-icon-container">
+                  <i class="fas fa-search find"></i>
+                </span>
+                <input type="text" placeholder="find in list" class="filter-input">
+              </div>
+              <div class="filter-country-container">
+                <div name="" id="country-list" class="country-select">
+                  <!-- TODO  remember to create your own select input-->
+                  <!-- <option value="country" selected disabled>
+                    Country
+                  </option>
+                  <option value="nigeria">Nigeria</option> -->
+                </div>
+              </div>
+              <div class="filter-country-toggle-btn-container">
+                <!-- TODO create a toggle btn here search online for copy paste so its faster -->
+                <div class="toggle-btn">
+                  <div class="toggle-mover"></div>
+                </div>
+                <span class="toggle-btn-title">Show country</span>
+              </div>
+            </form>
+          </div>
+          <!-- end of filter form container -->
+          <!-- =================== -->
+          <!--users card container -->
+          <div class="user-card-container">
+            <!-- individual user card container -->
+            <div class="individual-user-card-container">
+              <!-- user-image -->
+              <div class="user-image-container">
+                <div class="image-border">
+                  <img src="./founder.jpg" alt="user's image" class="user-image">
+                </div>
+              </div>
+              <!-- user details -->
+              <div class="user-details-container">
+                <!-- user name -->
+                <div class="user-name-container">
+                  <h3 class="user-name">Chie7tain okwuobi</h3>
+                </div>
+                <!-- user address -->
+                <div class="user-address-container">
+                  <p class="user-address">
+                    Plot C80 Azhata Off Kurudu Orozo Road
+                  </p>
+                </div>
+                <!-- user contact details -->
+                <div class="user-contact-details-container">
+                  <div class="user-email-container">
+                    <p class="user-email-address">
+                      <i class="far fa-envelope"></i>fredrickokwuobi@gmail.com
+                    </p>
+                  </div>
+                  <div class="user-phone-number-container">
+                    <p class="user-phone-number">
+                      <i class="fas fa-phone-alt"></i>
+                      08034829625
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <!-- expand user details button -->
+              <div class="expand-user-details-button-container">
+                <button class="expand-user-details-btn">
+                <i class="fas fa-arrow-right"></i>
+                </button>
+              </div>
+            </div>
+            <div class="individual-user-card-container">
+              <!-- user-image -->
+              <div class="user-image-container">
+                <div class="image-border">
+                  <img src="./founder.jpg" alt="user's image" class="user-image">
+                </div>
+              </div>
+              <!-- user details -->
+              <div class="user-details-container">
+                <!-- user name -->
+                <div class="user-name-container">
+                  <h3 class="user-name">Chie7tain okwuobi</h3>
+                </div>
+                <!-- user address -->
+                <div class="user-address-container">
+                  <p class="user-address">
+                    Plot C80 Azhata Off Kurudu Orozo Road
+                  </p>
+                </div>
+                <!-- user contact details -->
+                <div class="user-contact-details-container">
+                  <div class="user-email-container">
+                    <p class="user-email-address">
+                      <i class="far fa-envelope"></i>fredrickokwuobi@gmail.com
+                    </p>
+                  </div>
+                  <div class="user-phone-number-container">
+                    <p class="user-phone-number">
+                      <i class="fas fa-phone-alt"></i>
+                      08034829625
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <!-- expand user details button -->
+              <div class="expand-user-details-button-container">
+                <button class="expand-user-details-btn">
+                <i class="fas fa-arrow-right"></i>
+                </button>
+              </div>
+            </div>
+            <!-- end of individual user card container -->
+            <!-- =========== -->
+          </div>
+          <!-- end of users card container -->
+          <!-- =============== -->
         </div>
-        <!-- end of users card container -->
-        <!-- =============== -->
+        <!-- end of user display center -->
+        <!-- =================== -->
+        <!-- download results and navigate search result container -->
+        <div class="download-search-results-navigation-container">
+          <div class="download-results-btn-container">
+            <button class="download-results-btn">
+              <i class="fas fa-cloud-download-alt"></i>
+              Download results
+            </button>
+          </div>
+          <div class="navigation-buttons-container">
+            <button class="nav-btn-left nav-btn">
+              <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="nav-btn-right nav-btn">
+              <i class="fas fa-chevron-right next-prev-chevron"></i>
+            </button>
+          </div>
+        </div>
+        <!-- end of download results and navigation container -->
+        <!-- ============ -->
       </section>
       <!-- end of user display section -->
       <!-- =========================== -->

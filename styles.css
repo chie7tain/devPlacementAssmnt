@@ -16,7 +16,7 @@
   --standardWhite:#fff;
   --secondDarkBlue:#3c3f54;
   --mainPink:#f935a9;
-  --mainPink:#d476af;
+  --secondMainPink:#d476af;
   --mainLightBlue:#30bbb5;
   --mainPurple:#7946c1;
   --mainBlack:#000;
@@ -26,6 +26,7 @@
   --userCardBoxShadow:#0000000D;
   /* non-colors */
   --mainTransition:0.3s all linear;
+  --cardTransition:0.6s all linear;
   --mainBorderRadius:16px;
   --btnBorderRadius:7px;
   --secondBtnBorderRadius:13px;
@@ -35,4 +36,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.user-card-container{
+  transition:var(--cardTransition);
 }

@@ -18,11 +18,11 @@
         <script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
         <!-- end of icons from github -->
     <!-- styles -->
-    <link rel="stylesheet" href="styles.css">
     <!-- responsive styles -->
     <link rel="stylesheet" href="./responsiveStyles/desktop.css">
     <link rel="stylesheet" href="./responsiveStyles/tablet.css">
     <link rel="stylesheet" href="./responsiveStyles/mobile.css">
+    <link rel="stylesheet" href="styles.css">
     <!-- end of styles -->
   </head>
   <body>
@@ -56,13 +56,13 @@
           </div>
           <div class="find-users-button-container">
             <div class="filter-user-button-container">
-              <button id="all-users-btn" class="user-btn">
+              <button id="all-users-btn" class="user-btn filter-btn" data-gender="all">
                 <i class="fas fa-users user-icon"></i>
               </button>
               <p class="button-text">All Users</p>
             </div>
             <div class="filter-user-button-container">
-              <button id="male-users-btn" class="user-btn">
+              <button id="male-users-btn" class="user-btn filter-btn" data-gender="male">
                 <i class="fas fa-male user-icon"></i>
               </button>
               <p class="button-text">
@@ -70,7 +70,7 @@
               </p>
             </div>
             <div class="filter-user-button-container">
-              <button id="female-users-btn" class="user-btn">
+              <button id="female-users-btn" class="user-btn filter-btn" data-gender="female">
                 <i class="fas fa-female user-icon"></i>
               </button>
               <p class="button-text">
@@ -171,49 +171,10 @@
                 </button>
               </div>
             </div>
-            <div class="individual-user-card-container">
-              <!-- user-image -->
-              <div class="user-image-container">
-                <div class="image-border">
-                  <img src="./founder.jpg" alt="user's image" class="user-image">
-                </div>
-              </div>
-              <!-- user details -->
-              <div class="user-details-container">
-                <!-- user name -->
-                <div class="user-name-container">
-                  <h3 class="user-name">Chie7tain okwuobi</h3>
-                </div>
-                <!-- user address -->
-                <div class="user-address-container">
-                  <p class="user-address">
-                    Plot C80 Azhata Off Kurudu Orozo Road
-                  </p>
-                </div>
-                <!-- user contact details -->
-                <div class="user-contact-details-container">
-                  <div class="user-email-container">
-                    <p class="user-email-address">
-                      <i class="far fa-envelope"></i>fredrickokwuobi@gmail.com
-                    </p>
-                  </div>
-                  <div class="user-phone-number-container">
-                    <p class="user-phone-number">
-                      <i class="fas fa-phone-alt"></i>
-                      08034829625
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <!-- expand user details button -->
-              <div class="expand-user-details-button-container">
-                <button class="expand-user-details-btn">
-                <i class="fas fa-arrow-right"></i>
-                </button>
-              </div>
-            </div>
+    <!-- end of individual user card -->
+    <!-- ================= -->
             <!-- user card view -->
-            <div class="user-card-view">
+            <!-- <div class="user-card-view">
               <div class="back-btn-container">
                 <p class="back-btn-text">
                   <i class="fas fa-arrow-left"></i>
@@ -260,9 +221,10 @@
                   </div>
                 </div>
               </div>
-              </div>
+              </div> -->
               <!-- end of user-card center -->
-            </div>
+            <!-- </div> -->
+            <!-- end of user card view -->
             <!-- end of individual user card container -->
             <!-- =========== -->
           </div>
@@ -295,5 +257,7 @@
       <!-- =========================== -->
     </div>
     <!-- end of main container -->
+    <!-- javascript -->
+    <script src="app.js"></script>
   </body>
   </html>

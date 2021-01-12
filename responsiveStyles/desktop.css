@@ -272,6 +272,7 @@ margin-bottom:5px;
   display: flex;
   flex-direction:column;
   margin-top:17px;
+  transition:var(--cardTransition);
 }
 .individual-user-card-container{
   width:100%;
@@ -283,6 +284,7 @@ margin-bottom:5px;
   cursor:pointer;
   border-radius:var(--btnBorderRadius);
   margin-bottom:20px;
+  transition:var(--cardTransition);
 }
 
 .image-border{
@@ -362,6 +364,8 @@ margin-bottom:5px;
 .user-card-view{
   display:flex;
   flex-direction: column;
+  box-shadow:0px 0px 15px 2px var(--boxShadowBtn);
+  padding:1%;
 }
 .user-card-center{
   width:90%;
@@ -382,7 +386,7 @@ margin-bottom:5px;
   color:var(--mainLightBlue);
   margin-right: 5px;
 }
-.user-image-border{
+.user-avatar-border{
   border:3px solid var(--mainLightBlue);
   border-radius: 50px;
   width:100px;
@@ -433,7 +437,7 @@ margin-bottom:5px;
 }
 .when-joined-container{
   width:50%;
-  background:var(--mainPink);
+  background:var(--secondMainPink);
   height:40px;
   display:flex;
   justify-content:center;

@@ -1,10 +1,7 @@
-@media only screen and (min-width:401px) and (max-width:960px){
-  /*styles for main container */
+/*styles for main container */
 .container{
-  background: #8a9af8;
-  background: var(--mainDarkBlue);
+  background: #262A41;
   display: flex;
-  flex-direction:column;
   justify-content: space-between;
   height:100vh;
 }
@@ -46,7 +43,7 @@
   border:1px solid;
   width:100%;
   height:60px;
-  margin-bottom: 10px;
+  margin-bottom: 3em;
   border:none;
   position:relative;
 }
@@ -80,8 +77,8 @@
 .show-user-container{
   display:flex;
   flex-direction: column;
-  text-align:center;
   width:100%;
+  /* border:1px solid blue; */
 }
 .find-users-heading-container{
   margin-bottom:1.1em;
@@ -95,13 +92,17 @@
 }
 .find-users-button-container{
   display:flex;
-  justify-content: space-around;
+  /* justify-content: space-around; */
+  /* border:2px solid red; */
   width:100%;
 }
 .filter-user-button-container{
   display:flex;
   flex-direction:column;
   align-items: center;
+  margin-right:3em;
+  /* width:100%; */
+  /* border:1px solid white; */
 }
 .user-btn{
   border-radius:var(--mainBorderRadius);
@@ -360,8 +361,6 @@ margin-bottom:5px;
 .user-card-view{
   display:flex;
   flex-direction: column;
-  box-shadow:0px 0px 15px 2px var(--boxShadowBtn);
-  padding:1%;
 }
 .user-card-center{
   width:90%;
@@ -382,7 +381,7 @@ margin-bottom:5px;
   color:var(--mainLightBlue);
   margin-right: 5px;
 }
-.user-avatar-border{
+.user-image-border{
   border:3px solid var(--mainLightBlue);
   border-radius: 50px;
   width:100px;
@@ -508,5 +507,3 @@ margin-bottom:5px;
   color:var(--firstWhite);
 }
 /* end of styles for user-display section */
-  /* end tablet styles */
-}

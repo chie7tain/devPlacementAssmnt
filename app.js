@@ -8,7 +8,7 @@ const filterBtns = document.querySelectorAll(".filter-btn")
 class Users{
   async getUsersData(){
     try{
-     let results = await fetch("https://randomuser.me/api/?results=5&inc=gender,name,email,phone,cell,picture,location,nat&noinfo");
+     let results = await fetch("https://randomuser.me/api/?page=6&results=25&seed=abcdefgh&inc=gender,name,email,phone,cell,picture,location,nat&noinfo");
      return results;
     }catch(error){
       console.log(error);
@@ -88,6 +88,7 @@ class UI{
   }
 }
 window.addEventListener("DOMContentLoaded",()=>{
+// creating new instances of the users and  UI class
     const users = new Users();
     const display = new UI();
     users.getUsersData()

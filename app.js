@@ -3,7 +3,8 @@ const displayUserData = [...document.querySelectorAll(".expand-user-details-btn"
 const userCardView = document.querySelector(".user-card-view");
 const userCardContainer = document.querySelector(".user-card-container");
 const filterBtns = document.querySelectorAll(".filter-btn")
-
+const prevBtn = document.querySelector(".prev-btn");
+const nextBtn = document.querySelector(".next-btn");
 // creating a user class
 class Users{
   async getUsersData(){
@@ -16,8 +17,41 @@ class Users{
   }
 }
 class UI{
+  paginateUserData(data){
+    let page = 0;
+    let paginatedUserData = [];
+    function initialPagination(arr){
+      arr = [];
+      for(let i = 0; i < page + 5; i++){
+        arr.push(data[i]);
+      }
+      return arr;
+    }
+    paginatedUserData = initialPagination(paginatedUserData);
+    function subsequentPagination(arr){
+      console.log("in nextBtn")
+      if(page == data.length - 5){
+        page = 0;
+      }else{
+        page += 5;
+      }
+      arr = [];
+      for(let i = 0; i < page + 5; i++){
+        arr.push(data[i]);
+      }
+      console.log(arr);
+      return arr;
+    }
+    nextBtn.addEventListener("click",()=>{
+      console.log(paginatedUserData)
+     paginatedUserData = subsequentPagination(paginatedUserData);
+      console.log(paginatedUserData)
+    })
+    console.log(paginatedUserData)
+    return paginatedUserData;
+  }
   displayUsersData(usersData){
-    console.log(usersData)
+    usersData = this.paginateUserData(usersData);
     let personData = usersData.map(userData =>{
       return `
        <div class="individual-user-card-container">
@@ -98,6 +132,7 @@ window.addEventListener("DOMContentLoaded",()=>{
       let {results} = data;
       display.displayUsersData(results);
       display.filterUsers(results);
+      display.paginateUserData(results);
     })
 })
 

@@ -5,6 +5,8 @@ const userCardContainer = document.querySelector(".user-card-container");
 const filterBtns = document.querySelectorAll(".filter-btn")
 const prevBtn = document.querySelector(".prev-btn");
 const nextBtn = document.querySelector(".next-btn");
+
+
 // creating a user class
 // class Users{
   async function getUsersData(){
@@ -17,37 +19,47 @@ const nextBtn = document.querySelector(".next-btn");
   }
 // }
 let page = 0;
-let paginatedUserData = [];
+let usersPerPage = 3;
 function paginateUserDataInitial(data){
-      for(let i = 0; i < page + 5; i++){
+  let paginatedUserData = [];
+  let dataForFilter;
+      for(let i = 0; i < page + usersPerPage; i++){
         paginatedUserData.push(data[i]);
       }
     displayUsersData(paginatedUserData);
+    dataForFilter = paginatedUserData;
+     filterUsers(dataForFilter)
         nextBtn.addEventListener("click",()=>{
-      if(page == data.length - 5){
+      if(page == data.length - usersPerPage){
         page = 0;
       }else{
-        page += 5;
+        page += usersPerPage;
       }
       paginatedUserData = [];
-      for(let i = page; i < page + 5; i++){
+      for(let i = page; i < page + usersPerPage; i++){
         paginatedUserData.push(data[i])
       }
-      displayUsersData(paginatedUserData)
+     displayUsersData(paginatedUserData);
+     dataForFilter = paginatedUserData;
+      filterUsers(dataForFilter)
     })
 
     prevBtn.addEventListener("click",()=>{
       if(page == 0){
-        page = data.length - 5;
+        page = data.length - usersPerPage;
       }else{
-        page -= 5;
+        page -= usersPerPage;
       }
       paginatedUserData = [];
-      for(let i = page; i < page + 5; i++){
+      for(let i = page; i < page + usersPerPage; i++){
         paginatedUserData.push(data[i]);
       }
       displayUsersData(paginatedUserData);
+      dataForFilter = paginatedUserData;
+       filterUsers(dataForFilter)
+
     })
+
   }
 
 // class UI{
@@ -59,7 +71,7 @@ function paginateUserDataInitial(data){
                 <!-- user-image -->
                 <div class="user-image-container">
                   <div class="image-border">
-                    <img src="${userData.picture.medium}" alt="user's image" class="user-image">
+                    <img src="${userData.picture.thumbnail}" alt="user's image" class="user-image">
                   </div>
                 </div>
                 <!-- user details -->
@@ -100,6 +112,65 @@ function paginateUserDataInitial(data){
       })
     personData = personData.join("");
     userCardContainer.innerHTML = personData;
+    const userCards = [...document.querySelectorAll(".individual-user-card-container")];
+    userCards.forEach(card =>{
+      const viewUserProfileBtn = card.querySelector(".expand-user-details-btn");
+      viewUserProfileBtn.addEventListener("click",()=>{
+        userCardContainer.innerHTML =
+        `
+                   <!-- <div class="user-card-view">
+              <div class="back-btn-container">
+                <p class="back-btn-text">
+                  <i class="fas fa-arrow-left"></i>
+                  Results
+                </p>
+              </div>
+              <div class="user-card-center">
+                <div class="user-avatar-container">
+                <div class="user-avatar-border">
+                  <img src="./founder.jpg" alt="user image" class="user-avatar">
+                </div>
+              </div>
+              <div class="user-details-container-user-card">
+                <div class="name-of-user-container">
+                  <h3 class="name-of-user">Chie7tain Okwuobi <span class="user-age">29</span></h3>
+                </div>
+                <div class="address-of-user-container">
+                  <p class="address-of-user">
+                    Plot C80 azhta off kurudu orozo road
+                  </p>
+                </div>
+                <div class="email-of-user-container">
+                  <p class="email-of-user">
+                    <i class="fas fa-envelope"></i>
+                    fredrickokwuobi@gmail.com
+                  </p>
+                </div>
+                <div class="when-joined-container">
+                  <p class="when-joined">
+                    Joined: <span data-date-joined >2021-01-21</span>
+                  </p>
+                </div>
+                <div class="telephone-number-of-user-container">
+                  <div class="telephone-number-container">
+                    <p class="telephone-number-of-user tel">
+                      <i class="fas fa-phone-alt"></i>
+                      08034829625</p>
+                  </div>
+                  <div class="mobile-number-of-user-container">
+                    <p class="mobile-number-of-user tel">
+                      <i class="fas fa-mobile-alt"></i>
+                      081-334-841-33
+                    </p>
+                  </div>
+                </div>
+              </div>
+              </div> -->
+              <!-- end of user-card center -->
+            <!-- </div> -->
+        `
+      })
+    })
   }
   // this function would help to filter out users based on gender using the filter buttons
   function filterUsers(userData){
@@ -131,9 +202,8 @@ window.addEventListener("DOMContentLoaded",()=>{
     .then(data =>{
       let {results} = data;
       displayUsersData(results);
-      filterUsers(results);
-      paginateUserDataInitial(results);
-
+      // filterUsers(results);
+     paginateUserDataInitial(results);
     })
 })
 

@@ -8,16 +8,97 @@ const nextBtn = document.querySelector(".next-btn");
 
 
 // creating a user class
-// class Users{
-  async function getUsersData(){
+// geting the Users
+class Users{
+  async getUsers(){
     try{
-     let results = await fetch("https://randomuser.me/api/?page=6&results=25&seed=abcdefgh&inc=gender,name,email,phone,cell,picture,location,nat&noinfo");
-     return results;
+      let result = await fetch("users.json");
+      let users = await result.json();
+      users = users.map(user =>{
+        const {gender,email,phone,cell} = user;
+        const {first:firstName,last:lastName} = user.name;
+        const {number:streetNumber,name:streetName} = user.location.street;
+        const {city,state,country} = user.location;
+        const {thumbnail:userImage} = user.picture;
+
+        return {gender,firstName,lastName,email,phone,cell,streetNumber,streetName,city,state,country,userImage};
+      })
+      return users;
     }catch(error){
       console.log(error);
     }
   }
-// }
+}
+// displaying the Users
+class UI{
+  // display users function
+  displayUsersData(users){
+    let result = "";
+    users.forEach(user =>{
+      result += `
+      <div class="individual-user-card-container">
+              <!-- user-image -->
+              <div class="user-image-container">
+                <div class="image-border">
+                  <img src="${user.userImage}" alt="user's image" class="user-image">
+                </div>
+              </div>
+              <!-- user details -->
+              <div class="user-details-container">
+                <!-- user name -->
+                <div class="user-name-container">
+                  <h3 class="user-name">${user.firstName} ${user.lastName}</h3>
+                </div>
+                <!-- user address -->
+                <div class="user-address-container">
+                  <p class="user-address">
+                    ${user.streetNumber} ${user.streetName} ${user.city} ${user.state} ${user.country}
+                  </p>
+                </div>
+                <!-- user contact details -->
+                <div class="user-contact-details-container">
+                  <div class="user-email-container">
+                    <p class="user-email-address">
+                      <i class="far fa-envelope"></i>${user.email}
+                    </p>
+                  </div>
+                  <div class="user-phone-number-container">
+                    <p class="user-phone-number">
+                      <i class="fas fa-phone-alt"></i>
+                      ${user.cell}
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <!-- expand user details button -->
+              <div class="expand-user-details-button-container">
+                <button class="expand-user-details-btn" data-email=${user.email}>
+                <i class="fas fa-arrow-right" ></i>
+                </button>
+              </div>
+            </div>
+      `;
+    });
+    userCardContainer.innerHTML = result;
+  }
+// get expand user detatil button function
+  getUserDetailsBtn(users){
+    const btns = [...document.querySelectorAll(".expand-user-details-btn")];
+    // const userCard = [...document.querySelectorAll(".individual-user-card-container")]
+    // console.log(userCard)
+    console.log(users)
+    btns.forEach(btn =>{
+      let email = btn.dataset.email;
+      // let currentUser = userCard.find()
+    })
+  }
+}
+// local storage
+class Storage{
+  static saveUsers(users){
+    localStorage.setItem("users", JSON.stringify(users));
+  }
+}
 let page = 0;
 let usersPerPage = 3;
 function paginateUserDataInitial(data){
@@ -65,6 +146,7 @@ function paginateUserDataInitial(data){
 // class UI{
 
   function displayUsersData(usersData){
+
       let personData = usersData.map(userData =>{
         return `
          <div class="individual-user-card-container">
@@ -103,7 +185,7 @@ function paginateUserDataInitial(data){
                 </div>
                 <!-- expand user details button -->
                 <div class="expand-user-details-button-container">
-                  <button class="expand-user-details-btn">
+                  <button class="expand-user-details-btn data-email="">
                   <i class="fas fa-arrow-right"></i>
                   </button>
                 </div>
@@ -112,63 +194,14 @@ function paginateUserDataInitial(data){
       })
     personData = personData.join("");
     userCardContainer.innerHTML = personData;
+
     const userCards = [...document.querySelectorAll(".individual-user-card-container")];
+
     userCards.forEach(card =>{
       const viewUserProfileBtn = card.querySelector(".expand-user-details-btn");
       viewUserProfileBtn.addEventListener("click",()=>{
-        userCardContainer.innerHTML =
-        `
-                   <!-- <div class="user-card-view">
-              <div class="back-btn-container">
-                <p class="back-btn-text">
-                  <i class="fas fa-arrow-left"></i>
-                  Results
-                </p>
-              </div>
-              <div class="user-card-center">
-                <div class="user-avatar-container">
-                <div class="user-avatar-border">
-                  <img src="./founder.jpg" alt="user image" class="user-avatar">
-                </div>
-              </div>
-              <div class="user-details-container-user-card">
-                <div class="name-of-user-container">
-                  <h3 class="name-of-user">Chie7tain Okwuobi <span class="user-age">29</span></h3>
-                </div>
-                <div class="address-of-user-container">
-                  <p class="address-of-user">
-                    Plot C80 azhta off kurudu orozo road
-                  </p>
-                </div>
-                <div class="email-of-user-container">
-                  <p class="email-of-user">
-                    <i class="fas fa-envelope"></i>
-                    fredrickokwuobi@gmail.com
-                  </p>
-                </div>
-                <div class="when-joined-container">
-                  <p class="when-joined">
-                    Joined: <span data-date-joined >2021-01-21</span>
-                  </p>
-                </div>
-                <div class="telephone-number-of-user-container">
-                  <div class="telephone-number-container">
-                    <p class="telephone-number-of-user tel">
-                      <i class="fas fa-phone-alt"></i>
-                      08034829625</p>
-                  </div>
-                  <div class="mobile-number-of-user-container">
-                    <p class="mobile-number-of-user tel">
-                      <i class="fas fa-mobile-alt"></i>
-                      081-334-841-33
-                    </p>
-                  </div>
-                </div>
-              </div>
-              </div> -->
-              <!-- end of user-card center -->
-            <!-- </div> -->
-        `
+        console.log(usersData)
+        userCardContainer.innerHTML = card;
       })
     })
   }
@@ -193,18 +226,25 @@ function paginateUserDataInitial(data){
     })
   }
 // }
-window.addEventListener("DOMContentLoaded",()=>{
-// creating new instances of the users and  UI class
-    // const users = new Users();
-    // const display = new UI();
-    getUsersData()
-    .then(response => response.json())
-    .then(data =>{
-      let {results} = data;
-      displayUsersData(results);
-      // filterUsers(results);
-     paginateUserDataInitial(results);
-    })
+document.addEventListener("DOMContentLoaded",()=>{
+
+  const ui = new UI();
+  const users = new Users();
+  // get all users
+  users.getUsers().then(users => {
+    ui.displayUsersData(users);
+    Storage.saveUsers(users);
+  }).then(()=>{
+    ui.getUserDetailsBtn(users);
+  })
+    // getUsersData()
+    // .then(response => response.json())
+    // .then(data =>{
+    //   let {results} = data;
+    //   displayUsersData(results);
+    //   // filterUsers(results);
+    //  paginateUserDataInitial(results);
+    // })
 })
 
 

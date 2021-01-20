@@ -40,3 +40,17 @@
 .user-card-container{
   transition:var(--cardTransition);
 }
+.hide-back-btn{
+  display:none;
+}
+.show-back-btn{'
+  display:block;
+}
+.hide-user-card{
+  transform: translateY(-100%);
+  transition: var(--mainTransition);
+}
+.show-user-card{
+  transform:translateY(0%);
+  transition: var(--mainTransition);
+}

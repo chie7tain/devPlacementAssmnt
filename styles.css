@@ -43,14 +43,21 @@
 .hide-back-btn{
   display:none;
 }
-.show-back-btn{'
+.show-back-btn{
   display:block;
 }
 .hide-user-card{
   transform: translateY(-100%);
+  display:none;
   transition: var(--mainTransition);
 }
 .show-user-card{
   transform:translateY(0%);
   transition: var(--mainTransition);
+}
+.user-card-view{
+  transform:translateX(150%);
+}
+.show-user-card-view{
+  transform: translateX(0%);
 }

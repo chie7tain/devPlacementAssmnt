@@ -5,6 +5,8 @@ const userCardContainer = document.querySelector(".user-card-container");
 const filterBtns = document.querySelectorAll(".filter-btn")
 const prevBtn = document.querySelector(".prev-btn");
 const nextBtn = document.querySelector(".next-btn");
+const backBtn = document.querySelector(".back-btn-container");
+const userCardDisplay = document.querySelector(".user-card-display")
 
 
 // creating a user class
@@ -90,17 +92,26 @@ class UI{
               </div>
         `;
       });
-      userCardContainer.innerHTML += result;
+      userCardDisplay.innerHTML = result;
     }
 
-    getUserDetailsBtn(users){
+    getUserDetailsBtn(){
+
       const btns = [...document.querySelectorAll(".expand-user-details-btn")];
+
+                let backBtn = document.querySelector(".back-btn-container");
+                console.log(backBtn)
       btns.forEach(btn =>{
         let email = btn.dataset.email;
         btn.addEventListener("click",()=>{
           let user = Storage.getUser(email);
-          // display full profile
+          // hide user card container
+          this.hideUserCardContent();
           this.displayFullProfile(user);
+          this.showUserProfile();
+          // this.showBackBtn();
+          this.returnToResults()
+          // display full profile
         })
       })
     }
@@ -108,13 +119,6 @@ class UI{
 
     displayFullProfile(user){
       let userProfile = `
-      <div class="user-card-view">
-        <div class="back-btn-container">
-                  <p class="back-btn-text">
-                    <i class="fas fa-arrow-left"></i>
-                    Results
-                  </p>
-                </div>
                 <div class="user-card-center">
                   <div class="user-avatar-container">
                   <div class="user-avatar-border">
@@ -156,10 +160,9 @@ class UI{
                   </div>
                 </div>
                 </div>
-              </div>
-      `;
-      userCardContainer.innerHTML = userProfile;
 
+      `;
+      userCardView.innerHTML = userProfile;
     }
     paginateUserData(data){
         let page = 0;
@@ -225,7 +228,20 @@ class UI{
       })
     })
   }
-
+  showBackBtn(){
+    backBtn.classList.add("show-back-btn");
+  }
+    hideUserCardContent(){
+    userCardDisplay.classList.add("hide-user-card")
+    }
+    showUserProfile(){
+      userCardView.classList.add("show-user-card-view");
+    }
+    returnToResults(){
+      backBtn.addEventListener("click",()=>{
+         userCardDisplay.classList.remove("hide-user-card")
+      })
+    }
   }
 
 // local storage
@@ -329,7 +345,7 @@ document.addEventListener("DOMContentLoaded",()=>{
   const users = new Users();
   // get all users
   users.getUsers().then(users => {
-    ui.displayUsersData(users);
+    // ui.displayUsersData(users);
     ui.paginateUserData(users);
     Storage.saveUsers(users);
   }).then(()=>{

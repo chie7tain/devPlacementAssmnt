@@ -46,18 +46,25 @@
 .show-back-btn{
   display:block;
 }
+.user-card-display{
+  transition:var(--mainTransition);
+}
 .hide-user-card{
-  transform: translateY(-100%);
-  display:none;
-  transition: var(--mainTransition);
+  transform: translateY(-150%);
+  opacity: 0;
+  transition:var(--cardTransition);
 }
 .show-user-card{
   transform:translateY(0%);
   transition: var(--mainTransition);
 }
-.user-card-view{
-  transform:translateX(150%);
+.user-profile-display{
+  transition: var(--mainTransition);
+  display:none;
+  transform:translateX(100%);
 }
-.show-user-card-view{
+.show-user-profile{
+  grid-area: user-card-display;
+  display:block;
   transform: translateX(0%);
 }

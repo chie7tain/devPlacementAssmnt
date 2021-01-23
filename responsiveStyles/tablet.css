@@ -267,14 +267,41 @@ margin-bottom:5px;
   color:var(--mainDarkBlue);
 }
 .user-card-container{
-  display: flex;
-  flex-direction:column;
+  display: grid;
+  grid-template-columns:1fr;
+
+  grid-template-areas:
+  "back-btn-container "
+  "user-card-display ";
+
+  width:100%;
   margin-top:17px;
-  border:1px solid;
+  transition:var(--mainTransition)
 }
+.back-btn-container{
+  grid-area:back-btn-container;
+  margin-bottom:5px;
+  cursor:pointer;
+}
+.back-btn-text{
+  color:var(--inputBackground);
+  text-transform:uppercase;
+  font-size:.8em;
+}
+.fa-arrow-left{
+  color:var(--mainLightBlue);
+  margin-right: 5px;
+}
+.user-card-display{
+  grid-area: user-card-display;
+  width:100%;
+  display:flex;
+  flex-direction: column;
+}
+
 .individual-user-card-container{
   width:100%;
-  height: 100px;
+  height: 120px;
   display:flex;
   justify-content: space-around;
   align-items: center;
@@ -358,47 +385,42 @@ margin-bottom:5px;
   transform: rotate(90deg);
 }
 /* styles for user card view */
-.user-card-view{
+.user-profile-display{
   display:flex;
   flex-direction: column;
   box-shadow:0px 0px 15px 2px var(--boxShadowBtn);
+  border-radius:var(--mainBorderRadius);
   padding:1%;
+  /* position:absolute;
+  right:0px; */
+  margin-top:10px;
 }
 .user-card-center{
   width:90%;
   display:flex;
   justify-content: space-around;
   margin:20px auto;
+  /* border:1px solid ; */
 }
-.back-btn-container{
-  margin-bottom:5px;
-  cursor:pointer;
-}
-.back-btn-text{
-  color:var(--inputBackground);
-  text-transform:uppercase;
-  font-size:.8em;
-}
-.fa-arrow-left{
-  color:var(--mainLightBlue);
-  margin-right: 5px;
-}
+
 .user-avatar-border{
   border:3px solid var(--mainLightBlue);
-  border-radius: 50px;
-  width:100px;
+  border-radius: 100%;
+  width:150px;
 }
 .user-avatar{
   width:100%;
-  border-radius: 50px;
+  border-radius: 100%;
   margin:auto;
 }
 .user-details-container-user-card{
   display: flex;
   flex-direction:column;
+  justify-content:space-around;
   /* border:1px solid green; */
   width:100%;
   margin-left:20px;
+  height:300px;
 }
 .name-of-user-container{
   margin-bottom: 5px;
@@ -421,7 +443,7 @@ margin-bottom:5px;
 .email-of-user-container{
   background:var(--secondInputBackground);
   width:90%;
-  height:40px;
+  height:35px;
   display:flex;
   justify-content: center;
   align-items: center;
@@ -430,12 +452,12 @@ margin-bottom:5px;
 }
 .email-of-user{
   color:var(--inputBackground);
-  font-size:.8em;
+  font-size:1em;
 }
 .when-joined-container{
   width:50%;
   background:var(--mainPink);
-  height:40px;
+  height:35px;
   display:flex;
   justify-content:center;
   align-items:center;
@@ -443,7 +465,7 @@ margin-bottom:5px;
   margin-bottom:10px;
 }
 .when-joined{
-  font-size:.8em;
+  font-size:1em;
 }
 .telephone-number-of-user{
   margin-bottom:5px;

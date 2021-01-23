@@ -4,7 +4,7 @@
   background: #262A41;
   display: flex;
   justify-content: space-between;
-  height:100vh;
+  /* height:100vh; */
 }
 /* styles for hello section */
 .hello-section{
@@ -149,6 +149,7 @@
   flex-direction: column;
   align-items: center;
   padding:50px 0;
+  border-radius:10px;
 }
 .user-display-center{
   width:80%;
@@ -268,15 +269,41 @@ margin-bottom:5px;
   font-size:.6em;
   color:var(--mainDarkBlue);
 }
+/* user card container */
+
 .user-card-container{
-  display: flex;
-  flex-direction:column;
+  display: grid;
+  grid-template-columns:1fr;
+  grid-template-areas:
+  "back-btn-container "
+  "user-card-display ";
+  width:100%;
   margin-top:17px;
   transition:var(--cardTransition);
 }
+.back-btn-container{
+  grid-area:back-btn-container;
+  margin-bottom:5px;
+  cursor:pointer;
+}
+.back-btn-text{
+  color:var(--inputBackground);
+  text-transform:uppercase;
+  font-size:.8em;
+}
+.fa-arrow-left{
+  color:var(--mainLightBlue);
+  margin-right: 5px;
+}
+.user-card-display{
+  grid-area: user-card-display;
+    width:100%;
+  display:flex;
+  flex-direction: column;
+}
 .individual-user-card-container{
   width:100%;
-  height: 100px;
+  height: 150px;
   display:flex;
   justify-content: space-around;
   align-items: center;
@@ -363,9 +390,13 @@ margin-bottom:5px;
 /* styles for user card view */
 .user-profile-display{
   display:flex;
-  flex-direction: column;
+  /* flex-direction: column; */
   box-shadow:0px 0px 15px 2px var(--boxShadowBtn);
+  border-radius:10px;
   padding:1%;
+  margin-top:15px;
+  /* border:1px solid; */
+  /* height:500px; */
 }
 .user-card-center{
   width:90%;
@@ -373,27 +404,15 @@ margin-bottom:5px;
   justify-content: space-around;
   margin:20px auto;
 }
-.back-btn-container{
-  margin-bottom:5px;
-  cursor:pointer;
-}
-.back-btn-text{
-  color:var(--inputBackground);
-  text-transform:uppercase;
-  font-size:.8em;
-}
-.fa-arrow-left{
-  color:var(--mainLightBlue);
-  margin-right: 5px;
-}
+
 .user-avatar-border{
   border:3px solid var(--mainLightBlue);
-  border-radius: 50px;
-  width:100px;
+  border-radius: 100%;
+  width:150px;
 }
 .user-avatar{
   width:100%;
-  border-radius: 50px;
+  border-radius: 100%;
   margin:auto;
 }
 .user-details-container-user-card{
@@ -424,7 +443,7 @@ margin-bottom:5px;
 .email-of-user-container{
   background:var(--secondInputBackground);
   width:90%;
-  height:40px;
+  height:35px;
   display:flex;
   justify-content: center;
   align-items: center;
@@ -437,7 +456,7 @@ margin-bottom:5px;
 }
 .when-joined-container{
   width:50%;
-  background:var(--secondMainPink);
+  background:var(--mainPink);
   height:40px;
   display:flex;
   justify-content:center;

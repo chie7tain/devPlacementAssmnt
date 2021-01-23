@@ -21,7 +21,7 @@ class Users{
         const {first:firstName,last:lastName} = user.name;
         const {number:streetNumber,name:streetName} = user.location.street;
         const {city,state,country} = user.location;
-        const {thumbnail:userImage,medium:mediumSizeImage} = user.picture;
+        const {thumbnail:userImage,large:largeSizeImage} = user.picture;
 
         let {date:dateJoined} = user.registered;
         const {age} = user.dob;
@@ -29,7 +29,7 @@ class Users{
         dateJoined = dateJoined.toString();
         const dateRegistered = dateJoined.slice(0,10)
         const userAddress = `${streetNumber} ${streetName} ${city} ${state} ${country}`
-        return {gender,firstName,lastName,age,email,phone,cell,userAddress,userImage,mediumSizeImage,dateRegistered};
+        return {gender,firstName,lastName,age,email,phone,cell,userAddress,userImage,largeSizeImage,dateRegistered};
       })
       return users;
     }catch(error){
@@ -114,7 +114,7 @@ class UI{
                 <div class="user-card-center">
                   <div class="user-avatar-container">
                   <div class="user-avatar-border">
-                    <img src=${user.mediumSizeImage} alt="user image" class="user-avatar">
+                    <img src=${user.largeSizeImage} alt="user image" class="user-avatar">
                   </div>
                 </div>
                 <div class="user-details-container-user-card">

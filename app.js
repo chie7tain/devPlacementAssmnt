@@ -7,7 +7,8 @@ const prevBtn = document.querySelector(".prev-btn");
 const nextBtn = document.querySelector(".next-btn");
 const backBtn = document.querySelector(".back-btn-container");
 const userCardDisplay = document.querySelector(".user-card-display")
-
+const findUserInput = document.querySelector(".find-user-input");
+const selectCountry = document.querySelector("country-list");
 
 // creating a user class
 // geting the Users

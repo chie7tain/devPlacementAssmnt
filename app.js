@@ -8,7 +8,7 @@ const nextBtn = document.querySelector(".next-btn");
 const backBtn = document.querySelector(".back-btn-container");
 const userCardDisplay = document.querySelector(".user-card-display")
 const findUserInput = document.querySelector(".find-user-input");
-const selectCountry = document.querySelector("country-list");
+const selectCountry = document.querySelector("#country-list");
 
 // creating a user class
 // geting the Users
@@ -17,7 +17,9 @@ class Users{
     try{
       let result = await fetch("./users.json");
       let users = await result.json();
+
       users = users.map(user =>{
+        // destructuring the user item into several varibles for easy manipulation
         const {gender,email,phone,cell} = user;
         const {first:firstName,last:lastName} = user.name;
         const {number:streetNumber,name:streetName} = user.location.street;
@@ -30,7 +32,7 @@ class Users{
         dateJoined = dateJoined.toString();
         const dateRegistered = dateJoined.slice(0,10)
         const userAddress = `${streetNumber} ${streetName} ${city} ${state} ${country}`
-        return {gender,firstName,lastName,age,email,phone,cell,userAddress,userImage,largeSizeImage,dateRegistered};
+        return {gender,firstName,lastName,age,email,phone,cell,userAddress,userImage,largeSizeImage,dateRegistered,country};
       })
       return users;
     }catch(error){
@@ -42,7 +44,13 @@ class Users{
 class UI{
 
     displayUsersData(users){
-
+      let optionText = "";
+      users.forEach(user =>{
+        optionText += `
+        <option>${user.country}</option>
+        `
+      })
+      selectCountry.innerHTML = optionText;
       let result = "";
       users.forEach(user =>{
         result += `
@@ -92,7 +100,7 @@ class UI{
       userCardDisplay.innerHTML = result
     }
 
-    getUserDetailsBtn(users){
+    getUserDetailsBtn(){
       const expandDetailsBtns= [...document.querySelectorAll(".expand-user-details-btn")];
       expandDetailsBtns.forEach(btn =>{
         let email = btn.dataset.email;
@@ -159,7 +167,7 @@ class UI{
     }
     paginateUserData(data){
         let page = 0;
-        let usersPerPage = 3;
+        let usersPerPage = 5;
 
       let paginatedUserData = [];
       let dataForFilter;
@@ -170,6 +178,7 @@ class UI{
         dataForFilter = paginatedUserData;
         this.filterUsers(dataForFilter)
         this.getUserDetailsBtn(dataForFilter);
+        // this.searchForUser(dataForFilter)
             nextBtn.addEventListener("click",()=>{
           if(page == data.length - usersPerPage){
             page = 0;
@@ -184,6 +193,7 @@ class UI{
         dataForFilter = paginatedUserData;
           this.filterUsers(dataForFilter)
           this.getUserDetailsBtn(dataForFilter);
+          // this.searchForUser(dataForFilter)
         })
 
         prevBtn.addEventListener("click",()=>{
@@ -200,17 +210,17 @@ class UI{
           dataForFilter = paginatedUserData;
           this.filterUsers(dataForFilter)
           this.getUserDetailsBtn(dataForFilter);
+          // this.searchForUser(dataForFilter)
         })
 
     }
      // this function would help to filter out users based on gender using the filter buttons
     filterUsers(userData){
-    // filter users
+      // we use the filterbtns from the DOM to dynamically filter the user based on gender i.e the three buttons are stored in an array and we use the forEach array method to add a click event listener on the btns which checks the data set attribute of each button and depending on the data set, sets the users display arcordingly e.g if the female Users button is clicked and the data set attribute on the button is female, it then checks the users array for users with the gender female and sets the display to only show female users
     filterBtns.forEach(btn =>{
       btn.addEventListener("click",(e)=>{
         const category = e.currentTarget.dataset.gender;
         const genderCategory = userData.filter(userInfo =>{
-          // console.log(userInfo.gender);
           if(userInfo.gender === category){
             return userInfo;
           }
@@ -244,6 +254,26 @@ class UI{
          backBtn.classList.remove("show-back-btn");
       })
     }
+    // this function uses the array filter method on the users array to filter out users based on the input from the search box in the DOM i.e we add an eventlistener of keyup to the search input to fire whenever a key is released which then checks the users array to see which user matched the search parameter
+    searchForUser(users){
+      findUserInput.addEventListener("keyup",(event)=>{
+        console.log(event.target.value)
+        const searchString = event.target.value.toLowerCase();
+        let filterResult = users.filter(user =>{
+          return user.firstName.toLowerCase().includes(searchString)
+           || user.lastName.toLowerCase().includes(searchString)
+            || user.country.toLowerCase().includes(searchString);
+        })
+        // this line updates the user with a warning text when a user is not found in the database
+        if(filterResult == ""){
+          userCardDisplay.innerHTML = "user not found";
+          userCardDisplay.classList.add("user-not-found")
+        }else{
+          this.displayUsersData(filterResult);
+          // this.displayFullProfile(filterResult);
+        }
+      })
+    }
   }
 
 // local storage
@@ -270,6 +300,7 @@ document.addEventListener("DOMContentLoaded",()=>{
     ui.displayUsersData(users);
     Storage.saveUsers(users);
     ui.paginateUserData(users)
+    ui.searchForUser(users)
   })
 })
 

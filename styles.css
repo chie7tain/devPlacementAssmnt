@@ -68,3 +68,8 @@
   display:block;
   transform: translateX(0%);
 }
+.user-not-found{
+  color:var(--bluePurple);
+  text-align: center;
+  text-transform: uppercase;
+}

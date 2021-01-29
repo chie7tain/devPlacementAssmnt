@@ -31,6 +31,7 @@
   --btnBorderRadius:7px;
   --secondBtnBorderRadius:13px;
 }
+body{overflow-x: hidden;}
 /* end of root styles for construction */
 .centered-content{
   display: flex;
@@ -59,14 +60,20 @@
   transition: var(--mainTransition);
 }
 .user-profile-display{
-  transition: var(--mainTransition);
-  display:none;
+  /* transition: var(--mainTransition); */
+  transition:.5s all ease;
+  opacity: 0;
+  /* display: none; */
+  margin-top:40px;
   transform:translateX(100%);
+  position:absolute;
+  /* right:0px; */
 }
 .show-user-profile{
   grid-area: user-card-display;
-  display:block;
   transform: translateX(0%);
+  display:block;
+  opacity:1;
 }
 .user-not-found{
   color:var(--bluePurple);

@@ -1,5 +1,10 @@
-// dom elements
+// this is the link to the random user api
 const apiUrl = 'https://randomuser.me/api/?results=25&seed=abc&inc=gender,name,registered,location,email,cell,phone,dob,picture,nat&noinfo'
+// this is the link to countries api
+const countriesApit = "https://restcountries.eu/rest/v2/all?fields=name;capital";
+
+
+// dom elements
 const userProfileDisplay = document.querySelector(".user-profile-display");
 const userCardContainer = document.querySelector(".user-card-container");
 const filterBtns = document.querySelectorAll(".filter-btn")
@@ -12,10 +17,11 @@ const selectCountry = document.querySelector("#country-list");
 
 // creating a user class
 // geting the Users
+
 class Users{
   async getUsers(){
     try{
-      let result = await fetch("./users.json");
+      let result = await fetch("../users.json");
       let users = await result.json();
 
       users = users.map(user =>{
@@ -40,17 +46,49 @@ class Users{
     }
   }
 }
+class Countries{
+  static async getCountries(){
+    const response = await fetch("./countries.json");
+    let countries = await response.json();
+    countries = countries.map(country =>{
+      const {name:nameOfCountry,capital:capitalOfCountry} = country;
+
+      return {nameOfCountry,capitalOfCountry}
+    })
+    return countries;
+  }
+  static displayCountries(countries){
+    let optionText = "";
+    countries.forEach(country =>{
+      optionText +=`
+        <option>${country.nameOfCountry}</option>
+      `
+    })
+    selectCountry.innerHTML = optionText;
+    this.filterUsersByCountry(selectCountry);
+  }
+  static filterUsersByCountry(select){
+    let users;
+    select.addEventListener("change",(e)=>{
+      const selectedCountry = e.currentTarget.value;
+      users = Storage.getUsers();
+     let filteredUsers = users.filter(user =>{
+        return user.country === selectedCountry;
+      })
+
+      // display Users
+      UI.displayUsersData(filteredUsers)
+      // add filter by gender
+      UI.filterUsers(filteredUsers)
+      // add profile display btns
+      UI.getUserDetailsBtn(filteredUsers)
+    })
+  }
+}
 // displaying the Users
 class UI{
 
-    displayUsersData(users){
-      let optionText = "";
-      users.forEach(user =>{
-        optionText += `
-        <option>${user.country}</option>
-        `
-      })
-      selectCountry.innerHTML = optionText;
+    static displayUsersData(users){
       let result = "";
       users.forEach(user =>{
         result += `
@@ -99,8 +137,8 @@ class UI{
       });
       userCardDisplay.innerHTML = result
     }
-
-    getUserDetailsBtn(){
+// this function on click of the expandDetails Btn of each user check
+    static getUserDetailsBtn(){
       const expandDetailsBtns= [...document.querySelectorAll(".expand-user-details-btn")];
       expandDetailsBtns.forEach(btn =>{
         let email = btn.dataset.email;
@@ -111,14 +149,13 @@ class UI{
           // display full profile
           this.displayFullProfile(user);
           this.showUserProfile();
-          // this.showBackBtn();
           this.returnToResults()
         })
       })
     }
 
 
-    displayFullProfile(user){
+   static displayFullProfile(user){
       let userProfile = `
                 <div class="user-card-center">
                   <div class="user-avatar-container">
@@ -165,9 +202,9 @@ class UI{
       `;
       userProfileDisplay.innerHTML = userProfile;
     }
-    paginateUserData(data){
+    static paginateUserData(data){
         let page = 0;
-        let usersPerPage = 5;
+        let usersPerPage = 3;
 
       let paginatedUserData = [];
       let dataForFilter;
@@ -178,7 +215,7 @@ class UI{
         dataForFilter = paginatedUserData;
         this.filterUsers(dataForFilter)
         this.getUserDetailsBtn(dataForFilter);
-        // this.searchForUser(dataForFilter)
+
             nextBtn.addEventListener("click",()=>{
           if(page == data.length - usersPerPage){
             page = 0;
@@ -193,7 +230,6 @@ class UI{
         dataForFilter = paginatedUserData;
           this.filterUsers(dataForFilter)
           this.getUserDetailsBtn(dataForFilter);
-          // this.searchForUser(dataForFilter)
         })
 
         prevBtn.addEventListener("click",()=>{
@@ -210,12 +246,12 @@ class UI{
           dataForFilter = paginatedUserData;
           this.filterUsers(dataForFilter)
           this.getUserDetailsBtn(dataForFilter);
-          // this.searchForUser(dataForFilter)
+
         })
 
     }
      // this function would help to filter out users based on gender using the filter buttons
-    filterUsers(userData){
+   static filterUsers(userData){
       // we use the filterbtns from the DOM to dynamically filter the user based on gender i.e the three buttons are stored in an array and we use the forEach array method to add a click event listener on the btns which checks the data set attribute of each button and depending on the data set, sets the users display arcordingly e.g if the female Users button is clicked and the data set attribute on the button is female, it then checks the users array for users with the gender female and sets the display to only show female users
     filterBtns.forEach(btn =>{
       btn.addEventListener("click",(e)=>{
@@ -235,19 +271,19 @@ class UI{
       })
     })
   }
-  showBackBtn(){
+  static showBackBtn(){
     backBtn.classList.add("show-back-btn");
   }
-    hideUserCardContent(){
+  static hideUserCardContent(){
     userCardDisplay.classList.add("hide-user-card")
     }
     // this function helps the user view the full user profile when he/she clicks the expand user details btn
-    showUserProfile(){
+   static showUserProfile(){
       userProfileDisplay.classList.add("show-user-profile");
       backBtn.classList.add("show-back-btn");
     }
     // this function helps to return the user back to the previous page where he/she clicked from
-    returnToResults(){
+   static returnToResults(){
       backBtn.addEventListener("click",()=>{
          userCardDisplay.classList.remove("hide-user-card")
          userProfileDisplay.classList.remove("show-user-profile");
@@ -255,14 +291,13 @@ class UI{
       })
     }
     // this function uses the array filter method on the users array to filter out users based on the input from the search box in the DOM i.e we add an eventlistener of keyup to the search input to fire whenever a key is released which then checks the users array to see which user matched the search parameter
-    searchForUser(users){
+   static searchForUser(users){
       findUserInput.addEventListener("keyup",(event)=>{
-        console.log(event.target.value)
         const searchString = event.target.value.toLowerCase();
         let filterResult = users.filter(user =>{
           return user.firstName.toLowerCase().includes(searchString)
            || user.lastName.toLowerCase().includes(searchString)
-            || user.country.toLowerCase().includes(searchString);
+            || user.country.toLowerCase().includes(searchString) || user.firstName.toLowerCase().includes(searchString) && user.lastName.toLowerCase().includes(searchString);
         })
         // this line updates the user with a warning text when a user is not found in the database
         if(filterResult == ""){
@@ -270,7 +305,7 @@ class UI{
           userCardDisplay.classList.add("user-not-found")
         }else{
           this.displayUsersData(filterResult);
-          // this.displayFullProfile(filterResult);
+          this.getUserDetailsBtn(filterResult)
         }
       })
     }
@@ -285,22 +320,26 @@ class Storage{
     let users = JSON.parse(localStorage.getItem("users"));
     return users.find(user => user.email === email);
   }
+  static getUsers(){
+    let users = JSON.parse(localStorage.getItem("users"))
+    return users
+  }
 }
 
 
-// class UI{
-
 
 document.addEventListener("DOMContentLoaded",()=>{
+  Countries.getCountries().then(countries =>{
+    Countries.displayCountries(countries);
+  })
 
-  const ui = new UI();
   const users = new Users();
   // get all users
   users.getUsers().then(users => {
-    ui.displayUsersData(users);
+    UI.displayUsersData(users);
     Storage.saveUsers(users);
-    ui.paginateUserData(users)
-    ui.searchForUser(users)
+    UI.paginateUserData(users)
+    UI.searchForUser(users)
   })
 })
 

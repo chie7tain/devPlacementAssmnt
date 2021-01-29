@@ -143,6 +143,7 @@
 .user-display-section{
   background: #f7f7ff;
   width:100%;
+  height:100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -391,8 +392,6 @@ margin-bottom:5px;
   box-shadow:0px 0px 15px 2px var(--boxShadowBtn);
   border-radius:var(--mainBorderRadius);
   padding:1%;
-  /* position:absolute;
-  right:0px; */
   margin-top:10px;
 }
 .user-card-center{
@@ -400,7 +399,6 @@ margin-bottom:5px;
   display:flex;
   justify-content: space-around;
   margin:20px auto;
-  /* border:1px solid ; */
 }
 
 .user-avatar-border{
@@ -417,7 +415,6 @@ margin-bottom:5px;
   display: flex;
   flex-direction:column;
   justify-content:space-around;
-  /* border:1px solid green; */
   width:100%;
   margin-left:20px;
   height:300px;
@@ -442,30 +439,31 @@ margin-bottom:5px;
 }
 .email-of-user-container{
   background:var(--secondInputBackground);
-  width:90%;
+  width:100%;
   height:35px;
   display:flex;
   justify-content: center;
   align-items: center;
-  border-radius: var(--mainBorderRadius);
-  margin-bottom: 15px;
+  border-radius: 5px;
+  margin-bottom: 10px;
 }
 .email-of-user{
   color:var(--inputBackground);
-  font-size:1em;
+  font-size:.8em;
 }
 .when-joined-container{
-  width:50%;
+  width:100%;
   background:var(--mainPink);
   height:35px;
   display:flex;
   justify-content:center;
   align-items:center;
-  border-radius:var(--mainBorderRadius);
+  border-radius:5px;
   margin-bottom:10px;
 }
 .when-joined{
-  font-size:1em;
+  font-size:.8em;
+  color:var(--firstWhite)
 }
 .telephone-number-of-user{
   margin-bottom:5px;
@@ -479,7 +477,6 @@ margin-bottom:5px;
 /* ======= */
 /* download search results and navigation container styles */
 .download-search-results-navigation-container{
-  /* border:1px solid; */
   width:85%;
   margin-top:20px;
   display: flex;

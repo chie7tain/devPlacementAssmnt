@@ -40,6 +40,7 @@ body{overflow-x: hidden;}
 }
 .user-card-container{
   transition:var(--cardTransition);
+  position: relative;
 }
 .hide-back-btn{
   display:none;
@@ -79,4 +80,24 @@ body{overflow-x: hidden;}
   color:var(--bluePurple);
   text-align: center;
   text-transform: uppercase;
+}
+/* styles for preloader */
+.preloader{
+  position: absolute;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+  background:#F7F7FF;
+  box-shadow:var(--userCardBoxShadow);
+  display: grid;
+  justify-content:center;
+  align-items:center;
+  visibility: visible;
+  z-index:999;
+  transition: var(--mainTransition);
+}
+.hide-preloader{
+  z-index:-999;
+  visibility:hidden;
 }

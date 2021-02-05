@@ -14,7 +14,8 @@ const backBtn = document.querySelector(".back-btn-container");
 const userCardDisplay = document.querySelector(".user-card-display")
 const findUserInput = document.querySelector(".find-user-input");
 const selectCountry = document.querySelector("#country-list");
-
+const preloader = document.querySelector(".preloader");
+console.log(preloader)
 // creating a user class
 // geting the Users
 
@@ -55,9 +56,24 @@ class Countries{
 
       return {nameOfCountry,capitalOfCountry}
     })
+     let users = Storage.getUsers()
+     // console.log(users);
+     let userCountry = users.map(user =>{
+      let {country:userCountry} = user;
+      return userCountry;
+     })
+      // console.log(userCountry)
+      let countryHolder;
+
+    countryHolder = countries.some(worldCountry =>{
+      return 
+      userCountry.indexOf(worldCountry)});
+
+    console.log(countryHolder)
     return countries;
   }
   static displayCountries(countries){
+
     let optionText = "";
     countries.forEach(country =>{
       optionText +=`
@@ -83,6 +99,16 @@ class Countries{
       // add profile display btns
       UI.getUserDetailsBtn(filteredUsers)
     })
+  }
+  static retriveCountries(countries,holder){
+    console.log(holder);
+    let con = countries;
+    return con;
+
+  }
+  static filterCountries(userCountries){
+    // console.log(userCountries)
+    return userCountries;
   }
 }
 // displaying the Users
@@ -135,7 +161,10 @@ class UI{
               </div>
         `;
       });
-      userCardDisplay.innerHTML = result
+      userCardDisplay.innerHTML = result;
+      if(userCardDisplay){
+         preloader.classList.add("hide-preloader");
+      }
     }
 // this function on click of the expandDetails Btn of each user check
     static getUserDetailsBtn(){
@@ -309,12 +338,25 @@ class UI{
         }
       })
     }
+    // this method hides the preloader when the user data has been fetched and is ready to be displayed
+    static hidePreloader(){
+      window.addEventListener("load",()=>{
+        preloader.classList.add("hide-preloader");
+      })
+    }
   }
 
 // local storage
 class Storage{
   static saveUsers(users){
     localStorage.setItem("users", JSON.stringify(users));
+  }
+  static saveCountries(countries){
+    localStorage.setItem("countries",JSON.stringify(countries));
+  }
+  static getCountries(){
+    let countries = JSON.parse(localStorage.getItem("countries"));
+    return countries;
   }
   static getUser(email){
     let users = JSON.parse(localStorage.getItem("users"));
@@ -329,13 +371,16 @@ class Storage{
 
 
 document.addEventListener("DOMContentLoaded",()=>{
+  let holder = [];
   Countries.getCountries().then(countries =>{
+    Storage.saveCountries(countries);
     Countries.displayCountries(countries);
   })
 
   const users = new Users();
   // get all users
   users.getUsers().then(users => {
+   // holder = [...Countries.filterCountries(users)];
     UI.displayUsersData(users);
     Storage.saveUsers(users);
     UI.paginateUserData(users)
